@@ -5,6 +5,8 @@ const authenticate = (req, res, next) => {
     if(token) {
         const decoded = jwt.verify(token, "masai")
         if(decoded) {
+            const userID = decoded.userID
+            req.body.userID = userID
             next();
         } else {
             res.send("Please Login First")

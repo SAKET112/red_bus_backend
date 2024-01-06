@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const busSchema = mongoose.Schema({
-    bus_name:{type:String},
+    bus_name: {type:String},
     bus_model:{type:String},
     pick_up_time:{type:String},
     drop_time:{type:String},
@@ -10,12 +10,17 @@ const busSchema = mongoose.Schema({
     total_seat:{type:Number},
     price:{type:Number},
     seat_available:{type:Number},
-    seat_type:{type:String},
     pickup_address:{type:String},
     drop_address:{type:String},
     passengers:[{type:String}],
-    features:[{type:String}],
-    travel_name:{type:String}
+    travel_name:{type:String},
+    sleeper:{type:Boolean},
+    seater:{type:Boolean},
+    ac:{type:Boolean},
+    nonac:{type:Boolean},
+    wifi:{type:Boolean},
+    charging_point:{type:Boolean},
+    toilet:{type:Boolean}
 });
 
 const BusModel = mongoose.model("bus", busSchema);

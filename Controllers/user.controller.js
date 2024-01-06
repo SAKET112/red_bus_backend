@@ -2,6 +2,17 @@ const {UserModel} = require("../Models/User.model")
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken")
 
+
+const getUsers = async(req, res) => {
+    try {
+        const users = await UserModel.find();
+        res.status(200).json({message: "Users Fetched", data: users})
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({message: "Cannot fetch Users"})
+    }
+}
+
 const registerUser =  async(req, res) => {
     const {name, email, pass, age} = req.body
     try {
@@ -32,10 +43,10 @@ const loginUser =  async (req, res) => {
 
             bcrypt.compare(pass, hashed_pass, (err, result) => {
                 if(result){
-                    const token = jwt.sign({ course: 'backend' }, 'masai');
-                    res.send({"msg":"successfull", "token": token})
+                    const token = jwt.sign({ userID: user[0]._id }, 'masai');
+                    res.send({"msg":"LoggedIn", "token": token})
                 } else{
-                    res.send("Wrong email or password");
+                    res.send("Wrong Credentials");
                 }
             });
             
@@ -45,7 +56,7 @@ const loginUser =  async (req, res) => {
         }
         
     } catch (error) {
-        res.send("Something wnt wrong");
+        res.status(400).json({message: "Something went wrong"})
         console.log(error);
     }
 }
@@ -63,5 +74,5 @@ const deleteUser = async(req, res) => {
 
 
 module.exports = {
-    loginUser, registerUser, deleteUser
+    loginUser, registerUser, deleteUser, getUsers
 }
