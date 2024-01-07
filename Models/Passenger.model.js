@@ -5,7 +5,7 @@ const passengerSchema = mongoose.Schema({
     age:{type:Number, required:true},
     phoneNo:{type:String, required:true},
     gender:{type:String, required:true},
-    seat:[{type:String}]
+    seats:[{type:String}]
 })
 
 
