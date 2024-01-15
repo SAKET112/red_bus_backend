@@ -4,7 +4,8 @@ const {PassengerModel} = require("../Models/Passenger.model")
 const createPassenger = async(req, res) => {
     try {
         const passenger = await PassengerModel.create(req.body)
-        res.status(200).json({message: "Passenger added successfully"})
+        console.log(passenger);
+        res.status(200).json({message: "Passenger added successfully", data: passenger})
     } catch (error) {
         console.log(error);
         res.status(400).json({message: "Something went wrong when adding passenger"})

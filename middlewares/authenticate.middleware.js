@@ -12,7 +12,7 @@ const authenticate = (req, res, next) => {
             res.send("Please Login First")
         }
     } else {
-        res.send("Unsusseccfull")
+        res.status(400).json({message :"unSuccessFull"})
     }
 };
 
