@@ -16,7 +16,7 @@ const createBus = async(req, res) => {
 //Getting all buses from database
 const getBuses = async(req, res) => {
     try {
-        const buses = await BusModel.find()
+        const buses = await BusModel.find(req.query)
         res.status(200).json(buses)
     } catch (error) {
         console.log(error);
