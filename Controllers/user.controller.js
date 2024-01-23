@@ -43,7 +43,7 @@ const loginUser =  async (req, res) => {
 
             bcrypt.compare(pass, hashed_pass, (err, result) => {
                 if(result){
-                    const token = jwt.sign({ userID: user[0]._id }, 'masai');
+                    const token = jwt.sign({ userID: user[0]._id }, process.env.SECRET_CODE);
                     res.send({"msg":"LoggedIn", "token": token})
                 } else{
                     res.send("Wrong Credentials");
@@ -75,4 +75,4 @@ const deleteUser = async(req, res) => {
 
 module.exports = {
     loginUser, registerUser, deleteUser, getUsers
-}
+} 
